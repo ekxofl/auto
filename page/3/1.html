@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>hover효과 모음</title>
+</head>
+<style>
+    div > div.ss >a {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+     .ss .img_stemp {
+        transition: all .3s ease;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+
+    .ss .s1 .img_stemp {
+        background-image: url(../images/main/slide_img1.png);
+    }
+
+
+    .ss .text {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        -webkit-backdrop-filter: grayscale(1);
+        backdrop-filter: grayscale(1);
+    }
+
+    .ss .text .icon {
+        position: absolute;
+        top: 17px;
+        left: 30px;
+        font-size: 14px;
+        color: #fff;
+        font-style: normal;
+        background: #000;
+        padding: 5px 18px;
+        font-weight: 300;
+        box-sizing: border-box;
+    }
+
+    .ss .text .more {
+        display: inline-block;
+        position: absolute;
+        right: 17px;
+        bottom: 17px;
+        font-size: 14px;
+        color: #fff;
+        background: #cfa972;
+        padding: 9px 15px;
+        font-weight: 300;
+        box-sizing: border-box;
+        text-align: left;
+        width: 126px;
+        box-sizing: border-box;
+        opacity: 0;
+        transition: opacity .3s ease;
+    }
+
+    .ss .text .more:after {
+        display: inline-block;
+        content: "â†’";
+        clear: both;
+        position: absolute;
+        right: 17px;
+        top: 52%;
+        font-size: 22px;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .ss .text .tit {
+        position: absolute;
+        font-size: 22px;
+        bottom: 35px;
+        left: 30px;
+        color: #fff;
+        text-align: left;
+        line-height: 1.5;
+
+    }
+
+     .ss:hover .icon {
+        background: #cfa972;
+    }
+
+     .ss:hover .text .more {
+        opacity: 1;
+    }
+
+     .ss:hover .text {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+     .ss:hover .img_stemp {
+        transform: scale(1.1);
+    }
+</style>
+
+<body>
+    <div>
+        <h3>데모</h3>
+        <div style="background:#f5f5f5; padding:30px;">
+            <div class="ss s1" style="width: 100%; display: inline-block;">
+                <a href="#" class="wrap" tabindex="0">
+                    <div class="text">
+                        <i class="icon">쿠키뉴스</i>
+                        <p class="tit">“마약사건 구속수사 피하려면 <br> 전문가 조력 필요해”</p>
+                        <div class="more">더보기</div>
+                    </div>
+                    <div class="img_stemp"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>
+            html
+        </h3>
+        <div style="background:#f5f5f5; padding:30px;">
+            <pre>
+                <xmp>            
+                                     
+                </xmp>
+            </pre>
+
+        </div>
+    </div>
+    <div>
+        <h3>js</h3>
+        <div style="background:#f5f5f5; padding:30px;">
+            <pre>
+                <xmp>             
+                                                         
+                </xmp>
+            </pre>
+        </div>
+    </div>
+    <div>
+        <h3>css</h3>
+        <div style="background:#f5f5f5; padding:30px;">
+            <pre>
+                    <xmp>         
+                            div > div.ss >a {
+                                display: block;
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                            }
+                        
+                             .ss .img_stemp {
+                                transition: all .3s ease;
+                                width: 100%;
+                                height: 100%;
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background-size: cover;
+                                background-repeat: no-repeat;
+                                z-index: -1;
+                            }
+                        
+                            .ss .s1 .img_stemp {
+                                background-image: url(../images/main/slide_img1.png);
+                            }
+                        
+                        
+                            .ss .text {
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                top: 0;
+                                left: 0;
+                                -webkit-backdrop-filter: grayscale(1);
+                                backdrop-filter: grayscale(1);
+                            }
+                        
+                            .ss .text .icon {
+                                position: absolute;
+                                top: 17px;
+                                left: 30px;
+                                font-size: 14px;
+                                color: #fff;
+                                font-style: normal;
+                                background: #000;
+                                padding: 5px 18px;
+                                font-weight: 300;
+                                box-sizing: border-box;
+                            }
+                        
+                            .ss .text .more {
+                                display: inline-block;
+                                position: absolute;
+                                right: 17px;
+                                bottom: 17px;
+                                font-size: 14px;
+                                color: #fff;
+                                background: #cfa972;
+                                padding: 9px 15px;
+                                font-weight: 300;
+                                box-sizing: border-box;
+                                text-align: left;
+                                width: 126px;
+                                box-sizing: border-box;
+                                opacity: 0;
+                                transition: opacity .3s ease;
+                            }
+                        
+                            .ss .text .more:after {
+                                display: inline-block;
+                                content: "â†’";
+                                clear: both;
+                                position: absolute;
+                                right: 17px;
+                                top: 52%;
+                                font-size: 22px;
+                                -webkit-transform: translateY(-50%);
+                                -moz-transform: translateY(-50%);
+                                -ms-transform: translateY(-50%);
+                                -o-transform: translateY(-50%);
+                                transform: translateY(-50%);
+                            }
+                        
+                            .ss .text .tit {
+                                position: absolute;
+                                font-size: 22px;
+                                bottom: 35px;
+                                left: 30px;
+                                color: #fff;
+                                text-align: left;
+                                line-height: 1.5;
+                        
+                            }
+                        
+                             .ss:hover .icon {
+                                background: #cfa972;
+                            }
+                        
+                             .ss:hover .text .more {
+                                opacity: 1;
+                            }
+                        
+                             .ss:hover .text {
+                                -webkit-backdrop-filter: none;
+                                backdrop-filter: none;
+                            }
+                        
+                             .ss:hover .img_stemp {
+                                transform: scale(1.1);
+                            }
+                    </xmp>
+            </pre>
+        </div>
+    </div>
+</body>
+
+</html>
