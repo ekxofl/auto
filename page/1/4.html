@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>aos scroller</title>
+    <link rel="stylesheet" href="aos.css" />
+</head>
+<style>
+        .hljs {
+        display: block;
+        overflow-x: auto;
+        background: #202746;
+        color: #979db4;
+        padding: 0.5em;
+        -webkit-text-size-adjust: none;
+    }
+            .code {
+            width: 40%;
+            clear: both;
+            height: 200px;
+            background: #FFF;
+            border-radius: 2px;
+            margin: 12vh 0;
+            padding: 10px; }
+            .code pre, .code code {
+                height: 100%;
+                margin: 0; }
+            .code code {
+                padding: 20px 0 0 20px; }
+            .code--small code {
+                padding-top: 75px; }
+            .code--left {
+                float: left; }
+            .code--right {
+                float: right; }
+            .code--wider {
+                width: 60%; }
+                .code--wider code {
+                padding-top: 60px; }
+    
+        </style>
+<body>
+    <div style="position:relative;">
+        <h3>데모</h3>
+        <div style="background:#f5f5f5; padding:30px;">            
+            <div class="code code--small code--left" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" >
+                <pre>
+                    <code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>
+                    <span class="hljs-attribute">data-aos</span>=<span class="hljs-value">"fade-up"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></code>
+                </pre>
+            </div>
+        </div>
+    </div>
+    <div> 
+        <h3>
+            html
+        </h3>
+        <div style="background:#f5f5f5; padding:30px;">     
+            <pre>
+                <xmp>
+                    <div class="code code--small code--left" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" >
+                        <pre>
+                            <code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>
+                            <span class="hljs-attribute">data-aos</span>=<span class="hljs-value">"fade-up"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></code>
+                        </pre>
+                    </div>
+                </xmp>
+            </pre>       
+        </div>
+    </div>
+    <div>
+        <h3>js</h3> 
+        <div style="background:#f5f5f5; padding:30px;">    
+                <a href="aos.js" download>aos_js</a>        
+            <pre>
+                <xmp>     
+                    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>               
+                    AOS.init();                    
+                </xmp>
+            </pre>     
+        </div>
+    </div>
+    <div>
+        <h3>css</h3>
+        <div style="background:#f5f5f5; padding:30px;">     
+            <a href="aos.css" download>aos_css</a>
+        </div>
+    </div>
+    <script src="aos.js"></script>
+</body>
+</html>
