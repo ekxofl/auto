@@ -1,5 +1,5 @@
-https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/MotionPathPlugin.min.js/*!
- * GSAP 3.6.1
+// https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/MotionPathPlugin.min.js/*!
+ /* GSAP 3.6.1
  * https://greensock.com
  * 
  * @license Copyright 2021, GreenSock. All rights reserved.
