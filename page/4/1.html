@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>greensock 기본 js css down</title>
+    <title>greensock 기본 js down</title>
 </head>
 <body>
     <div> 
@@ -19,14 +19,30 @@
         <div style="background:#f5f5f5; padding:30px;">            
             <pre>
                 <xmp> 
-                    let top_btn = function() { 
-                        $('.top_btn').click(function(){
-                            $('html, body').animate({
-                                scrollTop : 0
-                            }, 400);
-                            return false;
-                        });
-                    }
+                        
+                <!-- greensock -->
+                <script src="gsap.js"></script> 
+
+                <!-- greensock extra -->
+                <script src="gsap_css.js"></script><!-- css 변수사용 및 ::before ::after 제어 가능 -->    
+                <script src="gsap_motion.js"></script><!-- motion svg 객체 배열.. -->
+                <script src="gsap_pixi.js"></script> <!-- animaition을 쉽게 만들수있는 플러그인 -->
+                <script src="gsap_scroll_to.js"></script><!-- window.scrollTo (x, y)) animaition -->
+                <script src="gsap_scroll_trigger.js"></script><!-- 스크롤트리거 -->
+                <script src="gsap_text.js"></script><!-- 텍스트 애니메이션 -->
+                <script src="gsap_drag.js"></script><!-- 마우스 및 / 또는 터치 이벤트를 사용하여 거의 모든 DOM 요소를 드래그 가능, 회전 가능, 던지기 가능 및 플릭 스크롤 가능하게 만드는 놀랍도록 간단한 방법 -->        
+
+                <!-- greensock -->
+                <script src="<?=$cfg['baseUrl']?>/gsap.js"></script> 
+
+                <!-- greensock extra -->
+                <script src="<?=$cfg['baseUrl']?>/gsap_css.js"></script><!-- css 변수사용 및 ::before ::after 제어 가능 -->    
+                <script src="<?=$cfg['baseUrl']?>/gsap_motion.js"></script><!-- motion svg 객체 배열.. -->
+                <script src="<?=$cfg['baseUrl']?>/gsap_pixi.js"></script> <!-- animaition을 쉽게 만들수있는 플러그인 -->
+                <script src="<?=$cfg['baseUrl']?>/gsap_scroll_to.js"></script><!-- window.scrollTo (x, y)) animaition -->
+                <script src="<?=$cfg['baseUrl']?>/gsap_scroll_trigger.js"></script><!-- 스크롤트리거 -->
+                <script src="<?=$cfg['baseUrl']?>/gsap_text.js"></script><!-- 텍스트 애니메이션 -->
+                <script src="<?=$cfg['baseUrl']?>/gsap_drag.js"></script><!-- 마우스 및 / 또는 터치 이벤트를 사용하여 거의 모든 DOM 요소를 드래그 가능, 회전 가능, 던지기 가능 및 플릭 스크롤 가능하게 만드는 놀랍도록 간단한 방법 -->        
                 </xmp>
             </pre>     
         </div>
