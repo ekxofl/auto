@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slick 커스텀1</title>
+</head>
+<style>
+.slider_page {
+    position: absolute;
+    bottom: 12vh;
+    left: calc(50% - 590px);
+}
+
+.slider_page .current_text,
+.slider_page .border_line,
+.slider_page .last_text,
+.slider_page .prev_btn,
+.slider_page .next_btn {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.slider_page .current_text {
+    color: #fff;
+    font-size: 20px;
+}
+
+.slider_page .last_text {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 20px;
+}
+
+.slider_page .border_line {
+    position: relative;
+    top: 3px;
+    vertical-align: middle;
+    width: 100px;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.4);
+    font-size: 0;
+}
+
+.slider_page .border_line span {
+    display: inline-block;
+    vertical-align: top;
+    width: 0;
+    height: 3px;
+    background-color: rgba(255, 255, 255);
+    transition: width 1s ease;
+}
+
+.prev_btn {
+    margin-left: 10px;
+    margin-right: 7px;
+}
+
+.prev_btn,
+.next_btn {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: auto;
+    left: 0;
+    right: 0;
+    margin-top: 0;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 6px 10px;
+    transition: .3s;
+    outline: none;
+    background: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.prev_btn,
+.next_btn {
+    top: -5px;
+    left: 10px;
+    right: auto;
+}
+
+.prev_btn::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    display: inline-block;
+    transform: rotate(225deg);
+    position: absolute;
+    top: calc(50% - 4px);
+    left: calc(50% - 4px);
+}
+
+.next_btn::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    display: inline-block;
+    transform: rotate(45deg);
+    position: absolute;
+    top: calc(50% - 4px);
+    left: calc(50% - 4px);
+}
+
+.prev_btn:hover,
+.next_btn:hover {
+    background: #fff;
+}
+
+.prev_btn:hover::after,
+.next_btn:hover::after {
+    border-top: 2px solid #d21b4f;
+    border-right: 2px solid #d21b4f;
+}
+
+.prev_btn .icon-arrow,
+.next_btn .icon-arrow {
+    display: block;
+    width: 6px;
+    height: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain
+}
+
+.slider_page .border_line span.active {
+    width: 25%;
+}
+
+.slider_page .border_line span.active {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    height: 3px;
+    background-color: rgba(255, 255, 255);
+}
+
+.slider_page .border_line span {
+    display: inline-block;
+    vertical-align: top;
+}
+</style>
+<body>
+    <div>
+        <h3>데모</h3>
+        <div style="background:#f5f5f5; padding:30px;">            
+            <div class="slider_page">
+                <span class="current_text">01</span>
+                <div class="border_line">
+                    <span class="active"></span>
+                    <span></span>
+                </div>
+                <span class="last_text">02</span>
+                <i class="prev_btn"></i>
+                <i class="next_btn"></i>
+            </div>
+        </div>
+    </div>
+    <div> 
+        <h3>
+            html
+        </h3>
+        <div style="background:#f5f5f5; padding:30px;">     
+            <pre>
+                <xmp>
+                    <div class="slider_page">
+                        <span class="current_text">01</span>
+                        <div class="border_line">
+                            <span class="active"></span>
+                            <span></span>
+                        </div>
+                        <span class="last_text">02</span>
+                        <i class="prev_btn"></i>
+                        <i class="next_btn"></i>
+                    </div>
+                </xmp>
+            </pre>       
+        </div>
+    </div>
+    <div>
+        <h3>js</h3> 
+        <div style="background:#f5f5f5; padding:30px;">            
+            <pre>
+                <xmp>
+                        let slick_ini = function () {
+                            $('.main_slide_box').slick({
+                                infinite: true,
+                                autoplay: true,
+                                autoplaySpeed: 5000,
+                                lazyLoad: 'progressive'
+                            });
+                    
+                            $(".slick-active").addClass('act');
+                    
+                            // On before slide change
+                            $('.main_slide_box').on('afterChange', function (event, slick, currentSlide, nextSlide) {
+                                $('.slick-slide').removeClass('act');
+                                $(slick.$slides[currentSlide]).addClass('act');
+                            });
+                    
+                            $('.main_slide_box').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                                var cnt = nextSlide + 1;
+                                $('.border_line span').removeClass('active');
+                                $('.slider_page .current_text').text("0" + cnt);
+                                for (var i = 0; i < nextSlide + 1; i++) {
+                                    $('.border_line span').eq(i).addClass("active");
+                                }
+                    
+                            });
+                            $('.prev_btn').on('click', function () {
+                                $('.slick-prev').trigger('click');
+                            });
+                    
+                            $('.next_btn').on('click', function () {
+                                $('.slick-next').trigger('click');
+                            });
+                        }
+                    
+                        slick_ini();
+                </xmp>
+            </pre>     
+        </div>
+    </div>
+    <div>
+        <h3>css</h3>
+        <div style="background:#f5f5f5; padding:30px;">            
+                .slider_page {
+                    position: absolute;
+                    bottom: 12vh;
+                    left: calc(50% - 590px);
+                }
+                
+                .slider_page .current_text,
+                .slider_page .border_line,
+                .slider_page .last_text,
+                .slider_page .prev_btn,
+                .slider_page .next_btn {
+                    display: inline-block;
+                    vertical-align: top;
+                }
+                
+                .slider_page .current_text {
+                    color: #fff;
+                    font-size: 20px;
+                }
+                
+                .slider_page .last_text {
+                    color: rgba(255, 255, 255, 0.4);
+                    font-size: 20px;
+                }
+                
+                .slider_page .border_line {
+                    position: relative;
+                    top: 3px;
+                    vertical-align: middle;
+                    width: 100px;
+                    height: 3px;
+                    background-color: rgba(255, 255, 255, 0.4);
+                    font-size: 0;
+                }
+                
+                .slider_page .border_line span {
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 0;
+                    height: 3px;
+                    background-color: rgba(255, 255, 255);
+                    transition: width 1s ease;
+                }
+                
+                .prev_btn {
+                    margin-left: 10px;
+                    margin-right: 7px;
+                }
+                
+                .prev_btn,
+                .next_btn {
+                    flex: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    top: auto;
+                    left: 0;
+                    right: 0;
+                    margin-top: 0;
+                    width: 30px;
+                    height: 30px;
+                    border: 1px solid #fff;
+                    border-radius: 50%;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 6px 10px;
+                    transition: .3s;
+                    outline: none;
+                    background: none;
+                    transition: all 0.3s ease;
+                    cursor: pointer;
+                }
+                
+                .prev_btn,
+                .next_btn {
+                    top: -5px;
+                    left: 10px;
+                    right: auto;
+                }
+                
+                .prev_btn::after {
+                    content: '';
+                    width: 7px;
+                    height: 7px;
+                    border-top: 2px solid #fff;
+                    border-right: 2px solid #fff;
+                    display: inline-block;
+                    transform: rotate(225deg);
+                    position: absolute;
+                    top: calc(50% - 4px);
+                    left: calc(50% - 4px);
+                }
+                
+                .next_btn::after {
+                    content: '';
+                    width: 7px;
+                    height: 7px;
+                    border-top: 2px solid #fff;
+                    border-right: 2px solid #fff;
+                    display: inline-block;
+                    transform: rotate(45deg);
+                    position: absolute;
+                    top: calc(50% - 4px);
+                    left: calc(50% - 4px);
+                }
+                
+                .prev_btn:hover,
+                .next_btn:hover {
+                    background: #fff;
+                }
+                
+                .prev_btn:hover::after,
+                .next_btn:hover::after {
+                    border-top: 2px solid #d21b4f;
+                    border-right: 2px solid #d21b4f;
+                }
+                
+                .prev_btn .icon-arrow,
+                .next_btn .icon-arrow {
+                    display: block;
+                    width: 6px;
+                    height: 10px;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: contain
+                }
+                
+                .slider_page .border_line span.active {
+                    width: 25%;
+                }
+                
+                .slider_page .border_line span.active {
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 50%;
+                    height: 3px;
+                    background-color: rgba(255, 255, 255);
+                }
+                
+                .slider_page .border_line span {
+                    display: inline-block;
+                    vertical-align: top;
+                }
+                
+        </div>
+    </div>
+</body>
+</html>
