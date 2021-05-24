@@ -54,6 +54,24 @@
                     tl.to(".box1", {duration: 2, x: 100}) //notice that there's no semicolon!
                         .to(".box2", {duration: 1, y: 200})
                         .to(".box3", {duration: 3, rotation: 360});
+
+                        // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
+                        gsap.utils.toArray(".com_left").forEach(com_left => {
+                            var tl = gsap.timeline({
+                                scrollTrigger: {
+                                trigger: com_left,
+                                // toggleActions: "restart none none none",
+                                start: "top 100%",
+                                markers: true
+                                }
+                            });
+                    
+                            tl.to(com_left, {
+                                duration: 1,
+                                opacity: 1,
+                                y:0
+                                });
+                        });
                 </xmp>
             </pre>               
         </div>
