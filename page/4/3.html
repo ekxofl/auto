@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>greensock 기본사용 1</title>
+    <title>greensock 기본사용 및 확대되는 극장 영화</title>
 </head>
 <style>
     .box {
@@ -119,7 +119,7 @@
             </div>
         </div>
     </div>
-    <div> 
+    <div class="end_tri">  
         <h3>
             html
         </h3>
@@ -197,9 +197,10 @@
                             scrollTrigger: {
                                 trigger: ".left_box",
                                 start: "top 85%",
-                                end : "bottom",
+                                end: "top 85%",
                                 markers: true,
-                                scrub: true
+                                scrub: true,
+                                endTrigger: ".end_tri"
                             }
                         });
                     tl2.to(".left_box", { width: 0 });
@@ -208,9 +209,10 @@
                             scrollTrigger: {
                                 trigger: ".right_box",
                                 start: "top 85%",
-                                end : "bottom",
+                                end: "top 85%",
                                 markers: true,
-                                scrub: true                    
+                                scrub: true,
+                                endTrigger: ".end_tri"
                             }
                         });
                     tl2.to(".right_box", { width: 0 });
@@ -336,9 +338,10 @@
                     scrollTrigger: {
                         trigger: ".left_box",
                         start: "top 85%",
-                        end : "bottom",
+                        end: "top 85%",
                         markers: true,
-                        scrub: true
+                        scrub: true,
+                        endTrigger: ".end_tri"
                     }
                 });
             tl2.to(".left_box", { width: 0 });
@@ -347,9 +350,10 @@
                     scrollTrigger: {
                         trigger: ".right_box",
                         start: "top 85%",
-                        end : "bottom",
+                        end: "top 85%",
                         markers: true,
-                        scrub: true                    
+                        scrub: true,
+                        endTrigger: ".end_tri"
                     }
                 });
             tl2.to(".right_box", { width: 0 });
