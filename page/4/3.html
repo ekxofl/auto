@@ -160,14 +160,17 @@
                 scrollTrigger: {
                 trigger: bt,
                 // toggleActions: "restart none none none",
-                start: "top 95%",
+                start: "center bottom",
+                end: "center top",
                 markers: true
-                },
+                }
+            });
+    
+            tl.to(bt, {
                 duration: 1,
                 opacity: 1,
                 y:0
-            });
-              
+                });
         });
 
 
