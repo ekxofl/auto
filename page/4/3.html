@@ -7,41 +7,76 @@
     <title>greensock 기본사용 1</title>
 </head>
 <style>
-.box {
-  display: block;
-  width:200px;
-  height:200px;
-  margin:0 auto;
-  margin-top:100px;
-}
+    .box {
+        display: block;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        margin-top: 100px;
+    }
 
-.ani_bt { opacity: 0; transform: translate(0,100px);}
-.ani_tb { opacity: 0; transform: translate(0,-100px);}
-.ani_lr { opacity: 0; transform: translate(-100px,0);}
-.ani_rl { opacity: 0; transform: translate(100px,0);}
+    .wrap_ju {
+        width: 100%;
+        position: relative;
+    }
 
+    .wrap_ju .ju {
+        margin: 0 auto;
+        z-index: 1;
+        position: relative;
+        width: 100%;
+        height: 800px;
+        background: gold;
+    }
 
-.inline-block {
-    display:inline-block;
-}
-.main_bg {
-    width:100%;
-    height: 100vh;
-}
-.center {
-    text-align:center;
-}
+    .wrap_ju .left_box {
+        position: absolute;
+        z-index: 2;
+        width: calc(50% - 600px);
+        left: 0;
+        top: 0;
+        height: 800px;
+        background: #fff;
+    }
 
-.green { background-color:green;}
-.pink {
-  background-color: pink;
-}
-.orange {
-  background-color: orange;
-}
-.grey {
-  background-color: grey;
-}
+    .wrap_ju .right_box {
+        position: absolute;
+        z-index: 2;
+        width: calc(50% - 600px);
+        right: 0;
+        top: 0;
+        height: 800px;
+        background: #fff;
+    }
+
+    .inline-block {
+        display: inline-block;
+    }
+
+    .main_bg {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .green {
+        background-color: green;
+    }
+
+    .pink {
+        background-color: pink;
+    }
+
+    .orange {
+        background-color: orange;
+    }
+
+    .grey {
+        background-color: grey;
+    }
 </style>
 <body>
     <div>
@@ -76,7 +111,13 @@
             <div class="box box3 grey ani_lr"></div>
             <div class="box box2 orange ani_lr"></div>
             <div class="box box3 grey ani_lr"></div>
-        </div>        
+        </div>
+        <div class="wrap_ju">
+            <div class="left_box"></div>
+            <div class="right_box"></div>
+            <div class="ju">
+            </div>
+        </div>
     </div>
     <div> 
         <h3>
@@ -85,9 +126,12 @@
         <div style="background:#f5f5f5; padding:30px;">  
             <pre>
                 <xmp>
-                    <div class="box box1 green"></div>
-                    <div class="box box2 orange"></div>
-                    <div class="box box3 grey"></div>
+                    <div class="wrap_ju">
+                        <div class="left_box"></div>
+                        <div class="right_box"></div>
+                        <div class="ju">
+                        </div>
+                    </div>
                 </xmp>
             </pre>
         </div>
@@ -97,31 +141,80 @@
         <div style="background:#f5f5f5; padding:30px;">            
             <pre>
                 <xmp> 
-                    var tl = gsap.timeline();
-                    //sequenced one-after-the-other
-                    tl.to(".box1", {duration: 2, x: 100}) //notice that there's no semicolon!
-                        .to(".box2", {duration: 1, y: 200})
-                        .to(".box3", {duration: 3, rotation: 360});
-
-                        // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
-                        gsap.utils.toArray(".com_left").forEach(com_left => {
-                            var tl = gsap.timeline({
-                                scrollTrigger: {
-                                trigger: com_left,
-                                // toggleActions: "restart none none none",
-                                start: "top 100%",
-                                markers: true
-                                }
-                            });
-                    
-                            tl.to(com_left, {
-                                duration: 1,
-                                opacity: 1,
-                                y:0
-                                });
+                    //스크롤 트리거 플러그인 추가        
+                    gsap.registerPlugin(ScrollTrigger);
+            
+                    // 애니메이션 효과 셋팅 css로 안됨..
+                    gsap.set(".ani_tb",{y:-100,opacity:0})
+                    gsap.set(".ani_rl",{x:100,opacity:0})
+                    gsap.set(".ani_bt",{y:100,opacity:0})
+                    gsap.set(".ani_lr",{x:-100,opacity:0})
+            
+                    // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
+                    gsap.utils.toArray(".ani_tb").forEach(ani_tb => {
+                        var tl = gsap.timeline({
+                            scrollTrigger: {
+                                trigger: ani_tb,
+                                start: "top 100%"
+                            }
                         });
-
-                        //https://greensock.com/cheatsheet/
+                        tl.to(ani_tb, { duration: 1.5, opacity: 1, y: 0 });
+                    });
+            
+                    gsap.utils.toArray(".ani_rl").forEach(ani_rl => {
+                        var tl = gsap.timeline({
+                            scrollTrigger: {
+                                trigger: ani_rl,
+                                start: "top 100%"
+                            }
+                        });
+                        tl.to(ani_rl, { duration: 1.5, opacity: 1, x: 0 });
+                    });
+            
+                    gsap.utils.toArray(".ani_bt").forEach(ani_bt => {
+                        var tl = gsap.timeline({
+                            scrollTrigger: {
+                                trigger: ani_bt,
+                                start: "top 100%"
+                            }
+                        });
+                        tl.to(ani_bt, { duration: 1.5, opacity: 1, y: 0 });
+                    });
+            
+                    gsap.utils.toArray(".ani_lr").forEach(ani_lr => {
+                        var tl = gsap.timeline({
+                            scrollTrigger: {
+                                trigger: ani_lr,
+                                start: "top 100%"
+                            }            
+                        });
+                        tl.to(ani_lr, { duration: 1.5, opacity: 1, x: 0 });
+                    });
+            
+            
+                    // ============확대되는부분========== //
+                    var tl2 = gsap.timeline({
+                            scrollTrigger: {
+                                trigger: ".left_box",
+                                start: "top 85%",
+                                end : "bottom",
+                                markers: true,
+                                scrub: true
+                            }
+                        });
+                    tl2.to(".left_box", { width: 0 });
+            
+                    var tl2 = gsap.timeline({
+                            scrollTrigger: {
+                                trigger: ".right_box",
+                                start: "top 85%",
+                                end : "bottom",
+                                markers: true,
+                                scrub: true                    
+                            }
+                        });
+                    tl2.to(".right_box", { width: 0 });
+                    // ============확대되는부분========== //
                 </xmp>
             </pre>               
         </div>
@@ -129,7 +222,47 @@
     <div>
         <h3>css</h3>
         <div style="background:#f5f5f5; padding:30px;">            
+            <pre>
+                <xmp>
+                    
+                        .wrap_ju {
+                            width: 100%;
+                            position: relative;
+                        }
+                    
+                        .wrap_ju .ju {
+                            margin: 0 auto;
+                            z-index: 1;
+                            position: relative;
+                            width: 100%;
+                            height: 800px;
+                            background: gold;
+                        }
+                    
+                        .wrap_ju .left_box {
+                            position: absolute;
+                            z-index: 2;
+                            width: calc(50% - 600px);
+                            left: 0;
+                            top: 0;
+                            height: 800px;
+                            background: #fff;
+                        }
+                    
+                        .wrap_ju .right_box {
+                            position: absolute;
+                            z-index: 2;
+                            width: calc(50% - 600px);
+                            right: 0;
+                            top: 0;
+                            height: 800px;
+                            background: #fff;
+                        }
+                    
+                    
+                </xmp>
 
+            </pre>
         </div>
     </div>
 
@@ -146,51 +279,83 @@
     <script src="gsap_drag.js"></script><!-- 마우스 및 / 또는 터치 이벤트를 사용하여 거의 모든 DOM 요소를 드래그 가능, 회전 가능, 던지기 가능 및 플릭 스크롤 가능하게 만드는 놀랍도록 간단한 방법 -->        
 
     <script>
-        
-        gsap.registerPlugin(ScrollTrigger);
-              
-        // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
-        gsap.utils.toArray(".ani_tb").forEach( ani_tb => {
-            var tl = gsap.timeline({
-                scrollTrigger: {
-                trigger: ani_tb,                
-                start: "top 100%"
-                }
-            });            
-            tl.to(ani_tb, { duration: 1, opacity: 1, y: 0 });
-        });
 
-        gsap.utils.toArray(".ani_rl").forEach( ani_rl => {
-            var tl = gsap.timeline({
-                scrollTrigger: {
-                trigger: ani_rl,                
-                start: "top 100%"
-                }
-            });            
-            tl.to(ani_rl, { duration: 1, opacity: 1, x: 0 });
-        });
-
-        gsap.utils.toArray(".ani_bt").forEach( ani_bt => {
-            var tl = gsap.timeline({
-                scrollTrigger: {
-                trigger: ani_bt,                
-                start: "top 100%"
-                }
-            });            
-            tl.to(ani_bt, { duration: 1, opacity: 1, y: 0 });
-        });
-
-        gsap.utils.toArray(".ani_lr").forEach( ani_lr => {
-            var tl = gsap.timeline({
-                scrollTrigger: {
-                trigger: ani_lr,                
-                start: "top 100%"
-                }
-            });            
-            tl.to(ani_lr, { duration: 1, opacity: 1, x: 0 });
-        });
-
-
-    </script>
+            //스크롤 트리거 플러그인 추가        
+            gsap.registerPlugin(ScrollTrigger);
+    
+            // 애니메이션 효과 셋팅 css로 안됨..
+            gsap.set(".ani_tb",{y:-100,opacity:0})
+            gsap.set(".ani_rl",{x:100,opacity:0})
+            gsap.set(".ani_bt",{y:100,opacity:0})
+            gsap.set(".ani_lr",{x:-100,opacity:0})
+    
+            // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
+            gsap.utils.toArray(".ani_tb").forEach(ani_tb => {
+                var tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ani_tb,
+                        start: "top 100%"
+                    }
+                });
+                tl.to(ani_tb, { duration: 1.5, opacity: 1, y: 0 });
+            });
+    
+            gsap.utils.toArray(".ani_rl").forEach(ani_rl => {
+                var tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ani_rl,
+                        start: "top 100%"
+                    }
+                });
+                tl.to(ani_rl, { duration: 1.5, opacity: 1, x: 0 });
+            });
+    
+            gsap.utils.toArray(".ani_bt").forEach(ani_bt => {
+                var tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ani_bt,
+                        start: "top 100%"
+                    }
+                });
+                tl.to(ani_bt, { duration: 1.5, opacity: 1, y: 0 });
+            });
+    
+            gsap.utils.toArray(".ani_lr").forEach(ani_lr => {
+                var tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ani_lr,
+                        start: "top 100%"
+                    }            
+                });
+                tl.to(ani_lr, { duration: 1.5, opacity: 1, x: 0 });
+            });
+    
+    
+            // ============확대되는부분========== //
+            var tl2 = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ".left_box",
+                        start: "top 85%",
+                        end : "bottom",
+                        markers: true,
+                        scrub: true
+                    }
+                });
+            tl2.to(".left_box", { width: 0 });
+    
+            var tl2 = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ".right_box",
+                        start: "top 85%",
+                        end : "bottom",
+                        markers: true,
+                        scrub: true                    
+                    }
+                });
+            tl2.to(".right_box", { width: 0 });
+            // ============확대되는부분========== //
+            
+    
+        </script>
 </body>
 </html>
