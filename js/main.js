@@ -5,9 +5,9 @@ $(document).ready(function(){
         $('.tab_btn button').click(function(){
             
             $('.com_tab').removeClass('active');
-            $('.com_tab').removeClass('btn-success');            
+            $('.btn').removeClass('btn-success');            
             $('.com_tab').eq($(this).index()).addClass('active');
-            $('.com_tab').eq($(this).index()).addClass('btn-success');
+            $('.btn').eq($(this).index()).addClass('btn-success');
         });
     }
 
