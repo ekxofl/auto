@@ -14,19 +14,24 @@
   margin-top:100px;
 }
 
-.bt {
-    opacity: 0;
-    transform: translate(0,-100px);
-}
+.ani_bt { opacity: 0; transform: translate(0,-100px);}
+.ani_tb { opacity: 0; transform: translate(0,100px);}
+.ani_lr { opacity: 0; transform: translate(-100px,0);}
+.ani_rl { opacity: 0; transform: translate(100px,0);}
+
 
 .inline-block {
     display:inline-block;
 }
-
+.main_bg {
+    width:100%;
+    height: 100vh;
+}
 .center {
     text-align:center;
 }
 
+.green { background-color:green;}
 .pink {
   background-color: pink;
 }
@@ -40,6 +45,23 @@
 <body>
     <div>
         <h3>데모</h3>
+        <div class="main_bg green">
+
+        </div>
+        <div class="center">
+            <div class="box box1 pink tb"></div>
+            <div class="box box2 orange tb"></div>
+            <div class="box box3 grey tb"></div>
+            <div class="box box2 orange tb"></div>
+            <div class="box box3 grey tb"></div>
+        </div>
+        <div class="center">
+            <div class="box box1 pink rl"></div>
+            <div class="box box2 orange rl"></div>
+            <div class="box box3 grey rl"></div>
+            <div class="box box2 orange rl"></div>
+            <div class="box box3 grey rl"></div>
+        </div>
         <div class="center">
             <div class="box box1 pink bt"></div>
             <div class="box box2 orange bt"></div>
@@ -53,28 +75,7 @@
             <div class="box box3 grey lr"></div>
             <div class="box box2 orange lr"></div>
             <div class="box box3 grey lr"></div>
-        </div>
-        <div class="center">
-            <div class="box box1 pink rl"></div>
-            <div class="box box2 orange rl"></div>
-            <div class="box box3 grey rl"></div>
-            <div class="box box2 orange rl"></div>
-            <div class="box box3 grey rl"></div>
-        </div>
-        <div class="center">
-            <div class="box box1 pink tb"></div>
-            <div class="box box2 orange tb"></div>
-            <div class="box box3 grey tb"></div>
-            <div class="box box2 orange tb"></div>
-            <div class="box box3 grey tb"></div>
-        </div>
-        <div class="center">
-            <div class="box box1 pink ib"></div>
-            <div class="box box2 orange ib"></div>
-            <div class="box box3 grey ib"></div>
-            <div class="box box2 orange ib"></div>
-            <div class="box box3 grey ib"></div>
-        </div>
+        </div>        
     </div>
     <div> 
         <h3>
@@ -146,31 +147,47 @@
     <script>
         
         gsap.registerPlugin(ScrollTrigger);
-
-        // var tl1 = gsap.timeline();
-        // var tl2 = gsap.timeline();
-        // var tl3 = gsap.timeline();
-        // var tl4 = gsap.timeline();
-        // var tl5 = gsap.timeline();
-        //sequenced one-after-the-other        
+  
             
         // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
+        gsap.utils.toArray(".tb").forEach( tb => {
+            var tl = gsap.timeline({
+                scrollTrigger: {
+                trigger: tb,                
+                start: "top 100%"
+                }
+            });            
+            tl.to(tb, { duration: 1, opacity: 1, y:0 });
+        });
+
+        gsap.utils.toArray(".rl").forEach( rl => {
+            var tl = gsap.timeline({
+                scrollTrigger: {
+                trigger: rl,                
+                start: "top 100%"
+                }
+            });            
+            tl.to(rl, { duration: 1, opacity: 1, x:0 });
+        });
+
         gsap.utils.toArray(".bt").forEach( bt => {
             var tl = gsap.timeline({
                 scrollTrigger: {
-                trigger: bt,
-                // toggleActions: "restart none none none",
-                start: "center bottom",
-                end: "center top",
-                markers: true
+                trigger: bt,                
+                start: "top 100%"
                 }
-            });
-    
-            tl.to(bt, {
-                duration: 1,
-                opacity: 1,
-                y:0
-                });
+            });            
+            tl.to(bt, { duration: 1, opacity: 1, y:0 });
+        });
+
+        gsap.utils.toArray(".lr").forEach( lr => {
+            var tl = gsap.timeline({
+                scrollTrigger: {
+                trigger: lr,                
+                start: "top 100%"
+                }
+            });            
+            tl.to(lr, { duration: 1, opacity: 1, x:0 });
         });
 
 
