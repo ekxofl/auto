@@ -14,6 +14,11 @@
   margin-top:100px;
 }
 
+.bt {
+    opacity: 0;
+    transform: translateY(-100px);
+}
+
 .inline-block {
     display:inline-block;
 }
@@ -147,8 +152,7 @@
         var tl3 = gsap.timeline();
         var tl4 = gsap.timeline();
         var tl5 = gsap.timeline();
-        //sequenced one-after-the-other
-        tl1.to(".bt", {duration: 2, y: -100}) //notice that there's no semicolon!
+        //sequenced one-after-the-other        
             
         // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
         gsap.utils.toArray(".bt").forEach( bt => {
