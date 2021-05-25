@@ -157,7 +157,7 @@
                 start: "top 100%"
                 }
             });            
-            tl.to(ani_tb, { duration: 1, opacity: 1, yPercent:0 });
+            tl.to(ani_tb, { duration: 1, opacity: 1, y: percentToPixel(0) + "px" });
         });
 
         gsap.utils.toArray(".ani_rl").forEach( ani_rl => {
@@ -167,7 +167,7 @@
                 start: "top 100%"
                 }
             });            
-            tl.to(ani_rl, { duration: 1, opacity: 1, xPercent:0 });
+            tl.to(ani_rl, { duration: 1, opacity: 1, x: percentToPixel(0) + "px" });
         });
 
         gsap.utils.toArray(".ani_bt").forEach( ani_bt => {
@@ -177,7 +177,7 @@
                 start: "top 100%"
                 }
             });            
-            tl.to(ani_bt, { duration: 1, opacity: 1, yPercent:0 });
+            tl.to(ani_bt, { duration: 1, opacity: 1, y: percentToPixel(0) + "px" });
         });
 
         gsap.utils.toArray(".ani_lr").forEach( ani_lr => {
@@ -187,7 +187,7 @@
                 start: "top 100%"
                 }
             });            
-            tl.to(ani_lr, { duration: 1, opacity: 1, xPercent:0 });
+            tl.to(ani_lr, { duration: 1, opacity: 1, x: percentToPixel(0) + "px" });
         });
 
 
