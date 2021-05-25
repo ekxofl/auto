@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>greensock 기본사용 1</title>
+</head>
+<style>
+.box {
+  display: block;
+  width:200px;
+  height:200px;
+  margin-top:100px;
+}
+
+.inline-block {
+    display:inline-block;
+}
+
+.center {
+    text-align:center;
+}
+
+.pink {
+  background-color: pink;
+}
+.orange {
+  background-color: orange;
+}
+.grey {
+  background-color: grey;
+}
+</style>
+<body>
+    <div>
+        <h3>데모</h3>
+        <div class="center">
+            <div class="box box1 pink bt"></div>
+            <div class="box box2 orange bt"></div>
+            <div class="box box3 grey bt"></div>
+            <div class="box box2 orange bt"></div>
+            <div class="box box3 grey bt"></div>
+        </div>
+        <div class="center">
+            <div class="box box1 pink lr"></div>
+            <div class="box box2 orange lr"></div>
+            <div class="box box3 grey lr"></div>
+            <div class="box box2 orange lr"></div>
+            <div class="box box3 grey lr"></div>
+        </div>
+        <div class="center">
+            <div class="box box1 pink rl"></div>
+            <div class="box box2 orange rl"></div>
+            <div class="box box3 grey rl"></div>
+            <div class="box box2 orange rl"></div>
+            <div class="box box3 grey rl"></div>
+        </div>
+        <div class="center">
+            <div class="box box1 pink tb"></div>
+            <div class="box box2 orange tb"></div>
+            <div class="box box3 grey tb"></div>
+            <div class="box box2 orange tb"></div>
+            <div class="box box3 grey tb"></div>
+        </div>
+        <div class="center">
+            <div class="box box1 pink ib"></div>
+            <div class="box box2 orange ib"></div>
+            <div class="box box3 grey ib"></div>
+            <div class="box box2 orange ib"></div>
+            <div class="box box3 grey ib"></div>
+        </div>
+    </div>
+    <div> 
+        <h3>
+            html
+        </h3>
+        <div style="background:#f5f5f5; padding:30px;">  
+            <pre>
+                <xmp>
+                    <div class="box box1 green"></div>
+                    <div class="box box2 orange"></div>
+                    <div class="box box3 grey"></div>
+                </xmp>
+            </pre>
+        </div>
+    </div>
+    <div>
+        <h3>js</h3>
+        <div style="background:#f5f5f5; padding:30px;">            
+            <pre>
+                <xmp> 
+                    var tl = gsap.timeline();
+                    //sequenced one-after-the-other
+                    tl.to(".box1", {duration: 2, x: 100}) //notice that there's no semicolon!
+                        .to(".box2", {duration: 1, y: 200})
+                        .to(".box3", {duration: 3, rotation: 360});
+
+                        // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
+                        gsap.utils.toArray(".com_left").forEach(com_left => {
+                            var tl = gsap.timeline({
+                                scrollTrigger: {
+                                trigger: com_left,
+                                // toggleActions: "restart none none none",
+                                start: "top 100%",
+                                markers: true
+                                }
+                            });
+                    
+                            tl.to(com_left, {
+                                duration: 1,
+                                opacity: 1,
+                                y:0
+                                });
+                        });
+
+                        //https://greensock.com/cheatsheet/
+                </xmp>
+            </pre>               
+        </div>
+    </div>
+    <div>
+        <h3>css</h3>
+        <div style="background:#f5f5f5; padding:30px;">            
+
+        </div>
+    </div>
+
+    <!-- greensock -->
+    <script src="gsap.js"></script> 
+
+    <!-- greensock extra -->
+    <script src="gsap_css.js"></script><!-- css 변수사용 및 ::before ::after 제어 가능 -->    
+    <script src="gsap_motion.js"></script><!-- motion svg 객체 배열.. -->
+    <script src="gsap_pixi.js"></script> <!-- animaition을 쉽게 만들수있는 플러그인 -->
+    <script src="gsap_scroll_to.js"></script><!-- window.scrollTo (x, y)) animaition -->
+    <script src="gsap_scroll_trigger.js"></script><!-- 스크롤트리거 -->
+    <script src="gsap_text.js"></script><!-- 텍스트 애니메이션 -->
+    <script src="gsap_drag.js"></script><!-- 마우스 및 / 또는 터치 이벤트를 사용하여 거의 모든 DOM 요소를 드래그 가능, 회전 가능, 던지기 가능 및 플릭 스크롤 가능하게 만드는 놀랍도록 간단한 방법 -->        
+
+    <script>
+        
+        gsap.registerPlugin(ScrollTrigger);
+
+        var tl1 = gsap.timeline();
+        var tl2 = gsap.timeline();
+        var tl3 = gsap.timeline();
+        var tl4 = gsap.timeline();
+        var tl5 = gsap.timeline();
+        //sequenced one-after-the-other
+        tl1.to(".bt", {duration: 2, y: 100}) //notice that there's no semicolon!
+            
+        // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
+        gsap.utils.toArray(".bt").forEach( bt => {
+            var tl1 = gsap.timeline({
+                scrollTrigger: {
+                trigger: bt,
+                // toggleActions: "restart none none none",
+                start: "top 100%",
+                markers: true
+                }
+            });
+    
+            tl1.to(com_left, {
+                duration: 1,
+                opacity: 1,
+                y:0
+                });
+        });
+
+        
+    </script>
+</body>
+</html>
