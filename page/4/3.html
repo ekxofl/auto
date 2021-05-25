@@ -49,32 +49,32 @@
 
         </div>
         <div class="center">
-            <div class="box box1 pink tb"></div>
-            <div class="box box2 orange tb"></div>
-            <div class="box box3 grey tb"></div>
-            <div class="box box2 orange tb"></div>
-            <div class="box box3 grey tb"></div>
+            <div class="box box1 pink ani_tb"></div>
+            <div class="box box2 orange ani_tb"></div>
+            <div class="box box3 grey ani_tb"></div>
+            <div class="box box2 orange ani_tb"></div>
+            <div class="box box3 grey ani_tb"></div>
         </div>
         <div class="center">
-            <div class="box box1 pink rl"></div>
-            <div class="box box2 orange rl"></div>
-            <div class="box box3 grey rl"></div>
-            <div class="box box2 orange rl"></div>
-            <div class="box box3 grey rl"></div>
+            <div class="box box1 pink ani_rl"></div>
+            <div class="box box2 orange ani_rl"></div>
+            <div class="box box3 grey ani_rl"></div>
+            <div class="box box2 orange ani_rl"></div>
+            <div class="box box3 grey ani_rl"></div>
         </div>
         <div class="center">
-            <div class="box box1 pink bt"></div>
-            <div class="box box2 orange bt"></div>
-            <div class="box box3 grey bt"></div>
-            <div class="box box2 orange bt"></div>
-            <div class="box box3 grey bt"></div>
+            <div class="box box1 pink ani_bt"></div>
+            <div class="box box2 orange ani_bt"></div>
+            <div class="box box3 grey ani_bt"></div>
+            <div class="box box2 orange ani_bt"></div>
+            <div class="box box3 grey ani_bt"></div>
         </div>
         <div class="center">
-            <div class="box box1 pink lr"></div>
-            <div class="box box2 orange lr"></div>
-            <div class="box box3 grey lr"></div>
-            <div class="box box2 orange lr"></div>
-            <div class="box box3 grey lr"></div>
+            <div class="box box1 pink ani_lr"></div>
+            <div class="box box2 orange ani_lr"></div>
+            <div class="box box3 grey ani_lr"></div>
+            <div class="box box2 orange ani_lr"></div>
+            <div class="box box3 grey ani_lr"></div>
         </div>        
     </div>
     <div> 
@@ -147,47 +147,46 @@
     <script>
         
         gsap.registerPlugin(ScrollTrigger);
-  
-            
+              
         // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
-        gsap.utils.toArray(".tb").forEach( tb => {
+        gsap.utils.toArray(".ani_tb").forEach( ani_tb => {
             var tl = gsap.timeline({
                 scrollTrigger: {
-                trigger: tb,                
+                trigger: ani_tb,                
                 start: "top 100%"
                 }
             });            
-            tl.to(tb, { duration: 1, opacity: 1, y:0 });
+            tl.to(ani_tb, { duration: 1, opacity: 1, y:0 });
         });
 
-        gsap.utils.toArray(".rl").forEach( rl => {
+        gsap.utils.toArray(".ani_rl").forEach( ani_rl => {
             var tl = gsap.timeline({
                 scrollTrigger: {
-                trigger: rl,                
+                trigger: ani_rl,                
                 start: "top 100%"
                 }
             });            
-            tl.to(rl, { duration: 1, opacity: 1, x:0 });
+            tl.to(ani_rl, { duration: 1, opacity: 1, x:0 });
         });
 
-        gsap.utils.toArray(".bt").forEach( bt => {
+        gsap.utils.toArray(".ani_bt").forEach( ani_bt => {
             var tl = gsap.timeline({
                 scrollTrigger: {
-                trigger: bt,                
+                trigger: ani_bt,                
                 start: "top 100%"
                 }
             });            
-            tl.to(bt, { duration: 1, opacity: 1, y:0 });
+            tl.to(ani_bt, { duration: 1, opacity: 1, y:0 });
         });
 
-        gsap.utils.toArray(".lr").forEach( lr => {
+        gsap.utils.toArray(".ani_lr").forEach( ani_lr => {
             var tl = gsap.timeline({
                 scrollTrigger: {
-                trigger: lr,                
+                trigger: ani_lr,                
                 start: "top 100%"
                 }
             });            
-            tl.to(lr, { duration: 1, opacity: 1, x:0 });
+            tl.to(ani_lr, { duration: 1, opacity: 1, x:0 });
         });
 
 
