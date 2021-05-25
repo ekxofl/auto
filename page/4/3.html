@@ -147,16 +147,16 @@
         
         gsap.registerPlugin(ScrollTrigger);
 
-        var tl1 = gsap.timeline();
-        var tl2 = gsap.timeline();
-        var tl3 = gsap.timeline();
-        var tl4 = gsap.timeline();
-        var tl5 = gsap.timeline();
+        // var tl1 = gsap.timeline();
+        // var tl2 = gsap.timeline();
+        // var tl3 = gsap.timeline();
+        // var tl4 = gsap.timeline();
+        // var tl5 = gsap.timeline();
         //sequenced one-after-the-other        
             
         // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
         gsap.utils.toArray(".bt").forEach( bt => {
-            var tl1 = gsap.timeline({
+            var tl = gsap.timeline({
                 scrollTrigger: {
                 trigger: bt,
                 // toggleActions: "restart none none none",
@@ -165,7 +165,7 @@
                 }
             });
     
-            tl1.to(bt, {
+            tl.to(bt, {
                 duration: 1,
                 opacity: 1,
                 y:0
