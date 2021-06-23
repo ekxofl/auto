@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -78,6 +79,7 @@
         background-color: grey;
     }
 </style>
+
 <body>
     <div>
         <h3>데모</h3>
@@ -119,11 +121,11 @@
             </div>
         </div>
     </div>
-    <div class="end_tri">  
+    <div class="end_tri">
         <h3>
             html
         </h3>
-        <div style="background:#f5f5f5; padding:30px;">  
+        <div style="background:#f5f5f5; padding:30px;">
             <pre>
                 <xmp>
                     <div class="wrap_ju">
@@ -138,57 +140,142 @@
     </div>
     <div>
         <h3>js</h3>
-        <div style="background:#f5f5f5; padding:30px;">            
+        <div style="background:#f5f5f5; padding:30px;">
             <pre>
                 <xmp> 
-                    //스크롤 트리거 플러그인 추가        
-                    gsap.registerPlugin(ScrollTrigger);
-            
-                    // 애니메이션 효과 셋팅 css로 안됨..
-                    gsap.set(".ani_tb",{y:-100,opacity:0})
-                    gsap.set(".ani_rl",{x:100,opacity:0})
-                    gsap.set(".ani_bt",{y:100,opacity:0})
-                    gsap.set(".ani_lr",{x:-100,opacity:0})
-            
-                    // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
-                    gsap.utils.toArray(".ani_tb").forEach(ani_tb => {
-                        var tl = gsap.timeline({
-                            scrollTrigger: {
-                                trigger: ani_tb,
-                                start: "top 100%"
+                    //애니메이션 딜레이
+                    var time_delay = 0;
+                    //애니메이션 진행시간
+                    var time_dur = 1.5;
+
+                    $(document).ready(function () {
+
+                        mobile_ck = function () {
+                            var wW = $(window).width()
+                            console.log(wW);
+                            if (wW <= 640) {
+                                return true;
+                            } else {
+                                return false;
                             }
-                        });
-                        tl.to(ani_tb, { duration: 1.5, opacity: 1, y: 0 });
-                    });
-            
-                    gsap.utils.toArray(".ani_rl").forEach(ani_rl => {
-                        var tl = gsap.timeline({
-                            scrollTrigger: {
-                                trigger: ani_rl,
-                                start: "top 100%"
-                            }
-                        });
-                        tl.to(ani_rl, { duration: 1.5, opacity: 1, x: 0 });
-                    });
-            
-                    gsap.utils.toArray(".ani_bt").forEach(ani_bt => {
-                        var tl = gsap.timeline({
-                            scrollTrigger: {
-                                trigger: ani_bt,
-                                start: "top 100%"
-                            }
-                        });
-                        tl.to(ani_bt, { duration: 1.5, opacity: 1, y: 0 });
-                    });
-            
-                    gsap.utils.toArray(".ani_lr").forEach(ani_lr => {
-                        var tl = gsap.timeline({
-                            scrollTrigger: {
-                                trigger: ani_lr,
-                                start: "top 100%"
-                            }            
-                        });
-                        tl.to(ani_lr, { duration: 1.5, opacity: 1, x: 0 });
+                        }
+
+                        green_ini = function () {
+                            //스크롤 플러그인 추가
+                            gsap.registerPlugin(ScrollTrigger);
+
+                            // 트렌지션 -안되는 부분 미리 셋팅
+                            gsap.set(".ani_tb", { y: -100, opacity: 0 })
+                            gsap.set(".ani_rl", { x: 100, opacity: 0 })
+                            gsap.set(".ani_bt", { y: 100, opacity: 0 })
+                            gsap.set(".ani_lr", { x: -100, opacity: 0 })
+
+
+
+                            // GSAP TIMELINE 
+                            gsap.utils.toArray(".ani_tb").forEach(ani_tb => {
+                                if ($(ani_tb).is('[data-deley]')) {
+                                    time_delay = $(ani_tb).attr('data-deley');
+                                    if (mobile_ck()) {
+                                        time_delay = 0;
+                                    }
+                                }
+                                if ($(ani_tb).is('[data-dur]')) {
+                                    time_dur = $(ani_tb).attr('data-dur');
+                                }
+
+                                var tl = gsap.timeline({
+                                    scrollTrigger: {
+                                        trigger: ani_tb,
+                                        start: "top 100%",
+                                    }
+                                });
+                                tl.to(ani_tb, { delay: time_delay, duration: time_dur, opacity: 1, y: 0 });
+                            });
+
+                            gsap.utils.toArray(".ani_rl").forEach(ani_rl => {
+                                if ($(ani_rl).is('[data-deley]')) {
+                                    time_delay = $(ani_rl).attr('data-deley');
+                                    if (mobile_ck()) {
+                                        time_delay = 0;
+                                    }
+                                }
+                                if ($(ani_rl).is('[data-dur]')) {
+                                    time_dur = $(ani_rl).attr('data-dur');
+                                }
+
+                                var tl = gsap.timeline({
+                                    scrollTrigger: {
+                                        trigger: ani_rl,
+                                        start: "top 100%"
+                                    }
+                                });
+                                tl.to(ani_rl, { delay: time_delay, duration: time_dur, opacity: 1, x: 0 });
+                            });
+
+                            gsap.utils.toArray(".ani_bt").forEach(ani_bt => {
+                                console.log(ani_bt);
+                                if ($(ani_bt).filter('[data-delay]')) {
+                                    time_delay = $(ani_bt).attr('data-deley');
+                                    console.log(time_delay);
+                                    if (mobile_ck()) {
+                                        time_delay = 0;
+                                    }
+                                }
+
+                                if ($(ani_bt).is('[data-dur]')) {
+                                    time_dur = $(ani_bt).attr('data-dur');
+                                }
+
+                                var tl = gsap.timeline({
+                                    scrollTrigger: {
+                                        trigger: ani_bt,
+                                        start: "top 100%"
+                                    }
+                                });
+
+                                tl.to(ani_bt, { delay: time_delay, duration: time_dur, opacity: 1, y: 0 });
+
+                            });
+
+                            gsap.utils.toArray(".ani_lr").forEach(ani_lr => {
+                                if ($(ani_lr).is('[data-deley]')) {
+                                    time_delay = $(ani_lr).attr('data-deley');
+                                    if (mobile_ck()) {
+                                        time_delay = 0;
+                                    }
+                                }
+                                if ($(ani_lr).is('[data-dur]')) {
+                                    time_dur = $(ani_lr).attr('data-dur');
+                                }
+                                var tl = gsap.timeline({
+                                    scrollTrigger: {
+                                        trigger: ani_lr,
+                                        start: "top 100%"
+                                    }
+                                });
+                                tl.to(ani_lr, { delay: time_delay, duration: time_dur, opacity: 1, x: 0 });
+                            });
+
+
+                            //  width:100%
+                            // gsap.utils.toArray(".width100").forEach(width100 => {
+                            // var tl = gsap.timeline({
+                            //     scrollTrigger: {
+                            //         trigger: width100,
+                            //         start: "top 100%"
+                            //     }
+                            // });
+                            // tl.to(width100, { duration: 1.5, opacity: 1, width: "0%" });
+                            // });
+
+                        }
+
+                        //green_ini();
+
+
+
+
                     });
             
             
@@ -218,12 +305,12 @@
                     tl2.to(".right_box", { width: 0 });
                     // ============확대되는부분========== //
                 </xmp>
-            </pre>               
+            </pre>
         </div>
     </div>
     <div>
         <h3>css</h3>
-        <div style="background:#f5f5f5; padding:30px;">            
+        <div style="background:#f5f5f5; padding:30px;">
             <pre>
                 <xmp>
                     
@@ -269,97 +356,157 @@
     </div>
 
     <!-- greensock -->
-    <script src="gsap.js"></script> 
+    <script src="gsap.js"></script>
 
     <!-- greensock extra -->
-    <script src="gsap_css.js"></script><!-- css 변수사용 및 ::before ::after 제어 가능 -->    
+    <script src="gsap_css.js"></script><!-- css 변수사용 및 ::before ::after 제어 가능 -->
     <script src="gsap_motion.js"></script><!-- motion svg 객체 배열.. -->
     <script src="gsap_pixi.js"></script> <!-- animaition을 쉽게 만들수있는 플러그인 -->
     <script src="gsap_scroll_to.js"></script><!-- window.scrollTo (x, y)) animaition -->
     <script src="gsap_scroll_trigger.js"></script><!-- 스크롤트리거 -->
     <script src="gsap_text.js"></script><!-- 텍스트 애니메이션 -->
-    <script src="gsap_drag.js"></script><!-- 마우스 및 / 또는 터치 이벤트를 사용하여 거의 모든 DOM 요소를 드래그 가능, 회전 가능, 던지기 가능 및 플릭 스크롤 가능하게 만드는 놀랍도록 간단한 방법 -->        
+    <script src="gsap_drag.js"></script>
+    <!-- 마우스 및 / 또는 터치 이벤트를 사용하여 거의 모든 DOM 요소를 드래그 가능, 회전 가능, 던지기 가능 및 플릭 스크롤 가능하게 만드는 놀랍도록 간단한 방법 -->
 
     <script>
 
-            //스크롤 트리거 플러그인 추가        
-            gsap.registerPlugin(ScrollTrigger);
-    
-            // 애니메이션 효과 셋팅 css로 안됨..
-            gsap.set(".ani_tb",{y:-100,opacity:0})
-            gsap.set(".ani_rl",{x:100,opacity:0})
-            gsap.set(".ani_bt",{y:100,opacity:0})
-            gsap.set(".ani_lr",{x:-100,opacity:0})
-    
-            // GSAP TIMELINE 클래스 여러가지를 한번에 이용해서..
-            gsap.utils.toArray(".ani_tb").forEach(ani_tb => {
-                var tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: ani_tb,
-                        start: "top 100%"
+        //애니메이션 딜레이
+        var time_delay = 0;
+        //애니메이션 진행시간
+        var time_dur = 1.5;
+
+        $(document).ready(function () {
+
+            mobile_ck = function () {
+                var wW = $(window).width()
+                console.log(wW);
+                if (wW <= 640) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            green_ini = function () {
+                //�ㅽ겕濡� �몃━嫄� �뚮윭洹몄씤 異붽�
+                gsap.registerPlugin(ScrollTrigger);
+
+                // �좊땲硫붿씠�� �④낵 �뗮똿 css濡� �덈맖..
+                gsap.set(".ani_tb", { y: -100, opacity: 0 })
+                gsap.set(".ani_rl", { x: 100, opacity: 0 })
+                gsap.set(".ani_bt", { y: 100, opacity: 0 })
+                gsap.set(".ani_lr", { x: -100, opacity: 0 })
+
+
+
+                // GSAP TIMELINE �대옒�� �щ윭媛�吏�瑜� �쒕쾲�� �댁슜�댁꽌..
+                gsap.utils.toArray(".ani_tb").forEach(ani_tb => {
+                    if ($(ani_tb).is('[data-deley]')) {
+                        time_delay = $(ani_tb).attr('data-deley');
+                        if (mobile_ck()) {
+                            time_delay = 0;
+                        }
                     }
-                });
-                tl.to(ani_tb, { duration: 1.5, opacity: 1, y: 0 });
-            });
-    
-            gsap.utils.toArray(".ani_rl").forEach(ani_rl => {
-                var tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: ani_rl,
-                        start: "top 100%"
+                    if ($(ani_tb).is('[data-dur]')) {
+                        time_dur = $(ani_tb).attr('data-dur');
                     }
+
+                    var tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: ani_tb,
+                            start: "top 100%",
+                        }
+                    });
+                    tl.to(ani_tb, { delay: time_delay, duration: time_dur, opacity: 1, y: 0 });
                 });
-                tl.to(ani_rl, { duration: 1.5, opacity: 1, x: 0 });
-            });
-    
-            gsap.utils.toArray(".ani_bt").forEach(ani_bt => {
-                var tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: ani_bt,
-                        start: "top 100%"
+
+                gsap.utils.toArray(".ani_rl").forEach(ani_rl => {
+                    if ($(ani_rl).is('[data-deley]')) {
+                        time_delay = $(ani_rl).attr('data-deley');
+                        if (mobile_ck()) {
+                            time_delay = 0;
+                        }
                     }
-                });
-                tl.to(ani_bt, { duration: 1.5, opacity: 1, y: 0 });
-            });
-    
-            gsap.utils.toArray(".ani_lr").forEach(ani_lr => {
-                var tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: ani_lr,
-                        start: "top 100%"
-                    }            
-                });
-                tl.to(ani_lr, { duration: 1.5, opacity: 1, x: 0 });
-            });
-    
-    
-            // ============확대되는부분========== //
-            var tl2 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: ".left_box",
-                        start: "top 85%",
-                        end: "top 85%",
-                        markers: true,
-                        scrub: true,
-                        endTrigger: ".end_tri"
+                    if ($(ani_rl).is('[data-dur]')) {
+                        time_dur = $(ani_rl).attr('data-dur');
                     }
+
+                    var tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: ani_rl,
+                            start: "top 100%"
+                        }
+                    });
+                    tl.to(ani_rl, { delay: time_delay, duration: time_dur, opacity: 1, x: 0 });
                 });
-            tl2.to(".left_box", { width: 0 });
-    
-            var tl2 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: ".right_box",
-                        start: "top 85%",
-                        end: "top 85%",
-                        markers: true,
-                        scrub: true,
-                        endTrigger: ".end_tri"
+
+                gsap.utils.toArray(".ani_bt").forEach(ani_bt => {
+                    console.log(ani_bt);
+                    if ($(ani_bt).filter('[data-delay]')) {
+                        time_delay = $(ani_bt).attr('data-deley');
+                        console.log(time_delay);
+                        if (mobile_ck()) {
+                            time_delay = 0;
+                        }
                     }
+
+                    if ($(ani_bt).is('[data-dur]')) {
+                        time_dur = $(ani_bt).attr('data-dur');
+                    }
+
+                    var tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: ani_bt,
+                            start: "top 100%"
+                        }
+                    });
+
+                    tl.to(ani_bt, { delay: time_delay, duration: time_dur, opacity: 1, y: 0 });
+
                 });
-            tl2.to(".right_box", { width: 0 });
-            // ============확대되는부분========== //
-            
-    
-        </script>
+
+                gsap.utils.toArray(".ani_lr").forEach(ani_lr => {
+                    if ($(ani_lr).is('[data-deley]')) {
+                        time_delay = $(ani_lr).attr('data-deley');
+                        if (mobile_ck()) {
+                            time_delay = 0;
+                        }
+                    }
+                    if ($(ani_lr).is('[data-dur]')) {
+                        time_dur = $(ani_lr).attr('data-dur');
+                    }
+                    var tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: ani_lr,
+                            start: "top 100%"
+                        }
+                    });
+                    tl.to(ani_lr, { delay: time_delay, duration: time_dur, opacity: 1, x: 0 });
+                });
+
+
+                //  width:100%
+                // gsap.utils.toArray(".width100").forEach(width100 => {
+                // var tl = gsap.timeline({
+                //     scrollTrigger: {
+                //         trigger: width100,
+                //         start: "top 100%"
+                //     }
+                // });
+                // tl.to(width100, { duration: 1.5, opacity: 1, width: "0%" });
+                // });
+
+            }
+
+            //green_ini();
+
+
+
+
+        });
+
+
+    </script>
 </body>
+
 </html>
