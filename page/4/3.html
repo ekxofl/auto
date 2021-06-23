@@ -387,10 +387,10 @@
             }
 
             green_ini = function () {
-                //�ㅽ겕濡� �몃━嫄� �뚮윭洹몄씤 異붽�
+                //gsap 플러그인 추가 부분
                 gsap.registerPlugin(ScrollTrigger);
 
-                // �좊땲硫붿씠�� �④낵 �뗮똿 css濡� �덈맖..
+                //css로 설정 안되는 기본 설정
                 gsap.set(".ani_tb", {
                     y: -100,
                     opacity: 0
@@ -410,7 +410,7 @@
 
 
 
-                // GSAP TIMELINE �대옒�� �щ윭媛�吏�瑜� �쒕쾲�� �댁슜�댁꽌..
+                // GSAP TIMELINE 배열로 돌리기
                 gsap.utils.toArray(".ani_tb").forEach(ani_tb => {
                     if ($(ani_tb).is('[data-deley]')) {
                         time_delay = $(ani_tb).attr('data-deley');
