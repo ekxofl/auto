@@ -355,7 +355,7 @@
         </div>
     </div>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- greensock -->
     <script src="gsap.js"></script>
@@ -516,6 +516,33 @@
                         x: 0
                     });
                 });
+
+
+                // ============확대되는부분========== //
+                var tl2 = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: ".left_box",
+                            start: "top 85%",
+                            end: "top 85%",
+                            markers: true,
+                            scrub: true,
+                            endTrigger: ".end_tri"
+                        }
+                    });
+                tl2.to(".left_box", { width: 0 });
+        
+                var tl2 = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: ".right_box",
+                            start: "top 85%",
+                            end: "top 85%",
+                            markers: true,
+                            scrub: true,
+                            endTrigger: ".end_tri"
+                        }
+                    });
+                tl2.to(".right_box", { width: 0 });
+                // ============확대되는부분========== //
 
 
                 //  width:100%
