@@ -369,7 +369,6 @@
     <!-- 마우스 및 / 또는 터치 이벤트를 사용하여 거의 모든 DOM 요소를 드래그 가능, 회전 가능, 던지기 가능 및 플릭 스크롤 가능하게 만드는 놀랍도록 간단한 방법 -->
 
     <script>
-
         //애니메이션 딜레이
         var time_delay = 0;
         //애니메이션 진행시간
@@ -392,10 +391,22 @@
                 gsap.registerPlugin(ScrollTrigger);
 
                 // �좊땲硫붿씠�� �④낵 �뗮똿 css濡� �덈맖..
-                gsap.set(".ani_tb", { y: -100, opacity: 0 })
-                gsap.set(".ani_rl", { x: 100, opacity: 0 })
-                gsap.set(".ani_bt", { y: 100, opacity: 0 })
-                gsap.set(".ani_lr", { x: -100, opacity: 0 })
+                gsap.set(".ani_tb", {
+                    y: -100,
+                    opacity: 0
+                })
+                gsap.set(".ani_rl", {
+                    x: 100,
+                    opacity: 0
+                })
+                gsap.set(".ani_bt", {
+                    y: 100,
+                    opacity: 0
+                })
+                gsap.set(".ani_lr", {
+                    x: -100,
+                    opacity: 0
+                })
 
 
 
@@ -417,7 +428,12 @@
                             start: "top 100%",
                         }
                     });
-                    tl.to(ani_tb, { delay: time_delay, duration: time_dur, opacity: 1, y: 0 });
+                    tl.to(ani_tb, {
+                        delay: time_delay,
+                        duration: time_dur,
+                        opacity: 1,
+                        y: 0
+                    });
                 });
 
                 gsap.utils.toArray(".ani_rl").forEach(ani_rl => {
@@ -437,7 +453,12 @@
                             start: "top 100%"
                         }
                     });
-                    tl.to(ani_rl, { delay: time_delay, duration: time_dur, opacity: 1, x: 0 });
+                    tl.to(ani_rl, {
+                        delay: time_delay,
+                        duration: time_dur,
+                        opacity: 1,
+                        x: 0
+                    });
                 });
 
                 gsap.utils.toArray(".ani_bt").forEach(ani_bt => {
@@ -461,7 +482,12 @@
                         }
                     });
 
-                    tl.to(ani_bt, { delay: time_delay, duration: time_dur, opacity: 1, y: 0 });
+                    tl.to(ani_bt, {
+                        delay: time_delay,
+                        duration: time_dur,
+                        opacity: 1,
+                        y: 0
+                    });
 
                 });
 
@@ -481,7 +507,12 @@
                             start: "top 100%"
                         }
                     });
-                    tl.to(ani_lr, { delay: time_delay, duration: time_dur, opacity: 1, x: 0 });
+                    tl.to(ani_lr, {
+                        delay: time_delay,
+                        duration: time_dur,
+                        opacity: 1,
+                        x: 0
+                    });
                 });
 
 
@@ -498,14 +529,12 @@
 
             }
 
-            //green_ini();
+            green_ini();
 
 
 
 
         });
-
-
     </script>
 </body>
 
