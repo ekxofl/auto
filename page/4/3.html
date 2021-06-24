@@ -101,11 +101,11 @@
             <div class="box box3 grey ani_rl"></div>
         </div>
         <div class="center">
-            <div class="box box1 pink ani_bt"></div>
-            <div class="box box2 orange ani_bt"></div>
-            <div class="box box3 grey ani_bt"></div>
-            <div class="box box2 orange ani_bt"></div>
-            <div class="box box3 grey ani_bt"></div>
+            <div class="box box1 pink ani_bt" data-delay="1" data-dur="3" data-ease="1"></div>
+            <div class="box box2 orange ani_bt" data-delay="1" data-dur="3" data-ease="1"></div>
+            <div class="box box3 grey ani_bt" data-delay="1" data-dur="3" data-ease="1"></div>
+            <div class="box box2 orange ani_bt" data-delay="1" data-dur="3" data-ease="1"></div>
+            <div class="box box3 grey ani_bt" data-delay="1" data-dur="3" data-ease="1"></div>
         </div>
         <div class="center">
             <div class="box box1 pink ani_lr"></div>
@@ -174,8 +174,8 @@
 
                             // GSAP TIMELINE 
                             gsap.utils.toArray(".ani_tb").forEach(ani_tb => {
-                                if ($(ani_tb).is('[data-deley]')) {
-                                    time_delay = $(ani_tb).attr('data-deley');
+                                if ($(ani_tb).is('[data-delay]')) {
+                                    time_delay = $(ani_tb).attr('data-delay');
                                     if (mobile_ck()) {
                                         time_delay = 0;
                                     }
@@ -194,8 +194,8 @@
                             });
 
                             gsap.utils.toArray(".ani_rl").forEach(ani_rl => {
-                                if ($(ani_rl).is('[data-deley]')) {
-                                    time_delay = $(ani_rl).attr('data-deley');
+                                if ($(ani_rl).is('[data-delay]')) {
+                                    time_delay = $(ani_rl).attr('data-delay');
                                     if (mobile_ck()) {
                                         time_delay = 0;
                                     }
@@ -216,7 +216,7 @@
                             gsap.utils.toArray(".ani_bt").forEach(ani_bt => {
                                 console.log(ani_bt);
                                 if ($(ani_bt).filter('[data-delay]')) {
-                                    time_delay = $(ani_bt).attr('data-deley');
+                                    time_delay = $(ani_bt).attr('data-delay');
                                     console.log(time_delay);
                                     if (mobile_ck()) {
                                         time_delay = 0;
@@ -239,8 +239,8 @@
                             });
 
                             gsap.utils.toArray(".ani_lr").forEach(ani_lr => {
-                                if ($(ani_lr).is('[data-deley]')) {
-                                    time_delay = $(ani_lr).attr('data-deley');
+                                if ($(ani_lr).is('[data-delay]')) {
+                                    time_delay = $(ani_lr).attr('data-delay');
                                     if (mobile_ck()) {
                                         time_delay = 0;
                                     }
@@ -356,7 +356,8 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- greensock -->
     <script src="gsap.js"></script>
 
@@ -375,17 +376,84 @@
         var time_delay = 0;
         //애니메이션 진행시간
         var time_dur = 1.5;
+        //애니메이션 eassing
+        var ease_type = "power1.out";
+
+        // 변수 length 
+        var cnt;
+
 
         $(document).ready(function () {
 
             mobile_ck = function () {
                 var wW = $(window).width()
-                console.log(wW);
                 if (wW <= 640) {
                     return true;
                 } else {
                     return false;
                 }
+            }
+
+            // 그린샷 변수 초기화
+            green_var_ini = function () {
+                //애니메이션 딜레이
+                time_delay = 0;
+                //애니메이션 진행시간
+                time_dur = 1.5;
+                //애니메이션 eassing
+                ease_type = "power1.out";
+            }
+
+            // 그린샷 변수값 확인
+            green_data_confirm = function (el) {
+
+                cnt = $(el).length;
+
+                if ($(el).is('[data-delay]')) {
+                    time_delay = $(el).attr('data-delay');
+                    if (mobile_ck()) {
+                        time_delay = 0;
+                    }
+                }
+                if ($(el).is('[data-dur]')) {
+                    time_dur = $(el).attr('data-dur');
+                }
+
+                if ($(el).is('[data-ease]')) {
+                    ease_type = $(el).attr('data-ease');
+                }
+
+            }
+
+            // 그린샷 실행
+            green_execute = function (el, xy) {
+
+                var tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 100%",
+                    }
+                });
+
+                if (xy == 0) {
+                    tl.to(el, {
+                        delay: time_delay,
+                        duration: time_dur,
+                        ease: ease_type,
+                        opacity: 1,
+                        x: 0
+                    });
+                } else if (xy == 1) {
+                    tl.to(el, {
+                        delay: time_delay,
+                        duration: time_dur,
+                        ease: ease_type,
+                        opacity: 1,
+                        y: 0
+                    });
+                }
+
+
             }
 
             green_ini = function () {
@@ -413,134 +481,51 @@
 
 
                 // GSAP TIMELINE 배열로 돌리기
-                gsap.utils.toArray(".ani_tb").forEach(ani_tb => {
-                    if ($(ani_tb).is('[data-deley]')) {
-                        time_delay = $(ani_tb).attr('data-deley');
-                        if (mobile_ck()) {
-                            time_delay = 0;
-                        }
-                    }
-                    if ($(ani_tb).is('[data-dur]')) {
-                        time_dur = $(ani_tb).attr('data-dur');
-                    }
-
-                    var tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: ani_tb,
-                            start: "top 100%",
-                        }
-                    });
-                    tl.to(ani_tb, {
-                        delay: time_delay,
-                        duration: time_dur,
-                        opacity: 1,
-                        y: 0
-                    });
+                gsap.utils.toArray(".ani_tb").forEach((ani_tb, index) => {
+                    green_data_confirm(ani_tb);
+                    green_execute(ani_tb,1);
+                    if (index + 1 == cnt) { green_var_ini(); }
                 });
-
-                gsap.utils.toArray(".ani_rl").forEach(ani_rl => {
-                    if ($(ani_rl).is('[data-deley]')) {
-                        time_delay = $(ani_rl).attr('data-deley');
-                        if (mobile_ck()) {
-                            time_delay = 0;
-                        }
-                    }
-                    if ($(ani_rl).is('[data-dur]')) {
-                        time_dur = $(ani_rl).attr('data-dur');
-                    }
-
-                    var tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: ani_rl,
-                            start: "top 100%"
-                        }
-                    });
-                    tl.to(ani_rl, {
-                        delay: time_delay,
-                        duration: time_dur,
-                        opacity: 1,
-                        x: 0
-                    });
+                gsap.utils.toArray(".ani_rl").forEach((ani_rl, index) => {
+                    green_data_confirm(ani_rl);
+                    green_execute(ani_rl,0);                   
+                    if (index + 1 == cnt) { green_var_ini(); }
                 });
-
-                gsap.utils.toArray(".ani_bt").forEach(ani_bt => {
-                    console.log(ani_bt);
-                    if ($(ani_bt).filter('[data-delay]')) {
-                        time_delay = $(ani_bt).attr('data-deley');
-                        console.log(time_delay);
-                        if (mobile_ck()) {
-                            time_delay = 0;
-                        }
-                    }
-
-                    if ($(ani_bt).is('[data-dur]')) {
-                        time_dur = $(ani_bt).attr('data-dur');
-                    }
-
-                    var tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: ani_bt,
-                            start: "top 100%"
-                        }
-                    });
-
-                    tl.to(ani_bt, {
-                        delay: time_delay,
-                        duration: time_dur,
-                        opacity: 1,
-                        y: 0
-                    });
-
+                gsap.utils.toArray(".ani_bt").forEach((ani_bt, index) => {
+                    green_data_confirm(ani_bt);
+                    green_execute(ani_bt,1);                    
+                    if (index + 1 == cnt) { green_var_ini(); }
                 });
-
-                gsap.utils.toArray(".ani_lr").forEach(ani_lr => {
-                    if ($(ani_lr).is('[data-deley]')) {
-                        time_delay = $(ani_lr).attr('data-deley');
-                        if (mobile_ck()) {
-                            time_delay = 0;
-                        }
-                    }
-                    if ($(ani_lr).is('[data-dur]')) {
-                        time_dur = $(ani_lr).attr('data-dur');
-                    }
-                    var tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: ani_lr,
-                            start: "top 100%"
-                        }
-                    });
-                    tl.to(ani_lr, {
-                        delay: time_delay,
-                        duration: time_dur,
-                        opacity: 1,
-                        x: 0
-                    });
+                gsap.utils.toArray(".ani_lr").forEach((ani_lr, index) => {
+                    green_data_confirm(ani_lr);
+                    green_execute(ani_lr,0);                    
+                    if (index + 1 == cnt) { green_var_ini(); }
                 });
 
 
                 // ============확대되는부분========== //
                 var tl2 = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: ".left_box",
-                            start: "top 85%",
-                            end: "top 85%",
-                            markers: true,
-                            scrub: true,
-                            endTrigger: ".end_tri"
-                        }
-                    });
+                    scrollTrigger: {
+                        trigger: ".left_box",
+                        start: "top 85%",
+                        end: "top 85%",
+                        markers: true,
+                        scrub: true,
+                        endTrigger: ".end_tri"
+                    }
+                });
                 tl2.to(".left_box", { width: 0 });
-        
+
                 var tl2 = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: ".right_box",
-                            start: "top 85%",
-                            end: "top 85%",
-                            markers: true,
-                            scrub: true,
-                            endTrigger: ".end_tri"
-                        }
-                    });
+                    scrollTrigger: {
+                        trigger: ".right_box",
+                        start: "top 85%",
+                        end: "top 85%",
+                        markers: true,
+                        scrub: true,
+                        endTrigger: ".end_tri"
+                    }
+                });
                 tl2.to(".right_box", { width: 0 });
                 // ============확대되는부분========== //
 
