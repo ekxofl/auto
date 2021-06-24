@@ -381,10 +381,10 @@
 
         // 변수 length 
         var cnt;
-
-
+        
         $(document).ready(function () {
-
+            
+            //모바일 체크
             mobile_ck = function () {
                 var wW = $(window).width()
                 if (wW <= 640) {
@@ -406,23 +406,15 @@
 
             // 그린샷 변수값 확인
             green_data_confirm = function (el) {
-
                 cnt = $(el).length;
-
                 if ($(el).is('[data-delay]')) {
                     time_delay = $(el).attr('data-delay');
                     if (mobile_ck()) {
                         time_delay = 0;
                     }
                 }
-                if ($(el).is('[data-dur]')) {
-                    time_dur = $(el).attr('data-dur');
-                }
-
-                if ($(el).is('[data-ease]')) {
-                    ease_type = $(el).attr('data-ease');
-                }
-
+                if ($(el).is('[data-dur]')) { time_dur = $(el).attr('data-dur'); }
+                if ($(el).is('[data-ease]')) { ease_type = $(el).attr('data-ease'); }
             }
 
             // 그린샷 실행
@@ -453,32 +445,18 @@
                     });
                 }
 
-
             }
 
             green_ini = function () {
+
                 //gsap 플러그인 추가 부분
                 gsap.registerPlugin(ScrollTrigger);
 
                 //css로 설정 안되는 기본 설정
-                gsap.set(".ani_tb", {
-                    y: -100,
-                    opacity: 0
-                })
-                gsap.set(".ani_rl", {
-                    x: 100,
-                    opacity: 0
-                })
-                gsap.set(".ani_bt", {
-                    y: 100,
-                    opacity: 0
-                })
-                gsap.set(".ani_lr", {
-                    x: -100,
-                    opacity: 0
-                })
-
-
+                gsap.set(".ani_tb", { y: -100, opacity: 0 })
+                gsap.set(".ani_rl", { x: 100, opacity: 0 })
+                gsap.set(".ani_bt", { y: 100, opacity: 0 })
+                gsap.set(".ani_lr", { x: -100, opacity: 0 })
 
                 // GSAP TIMELINE 배열로 돌리기
                 gsap.utils.toArray(".ani_tb").forEach((ani_tb, index) => {
@@ -528,7 +506,6 @@
                 });
                 tl2.to(".right_box", { width: 0 });
                 // ============확대되는부분========== //
-
 
                 //  width:100%
                 // gsap.utils.toArray(".width100").forEach(width100 => {
