@@ -8,75 +8,32 @@
     <title>greensock 기본사용 및 확대되는 극장 영화</title>
 </head>
 <style>
-    .box {
-        display: block;
-        width: 200px;
-        height: 200px;
-        margin: 0 auto;
-        margin-top: 100px;
-    }
-
-    .wrap_ju {
-        width: 100%;
+    section {
         position: relative;
-    }
-
-    .wrap_ju .ju {
-        margin: 0 auto;
-        z-index: 1;
-        position: relative;
-        width: 100%;
-        height: 800px;
-        background: gold;
-    }
-
-    .wrap_ju .left_box {
-        position: absolute;
-        z-index: 2;
-        width: calc(50% - 600px);
-        left: 0;
-        top: 0;
-        height: 800px;
-        background: #fff;
-    }
-
-    .wrap_ju .right_box {
-        position: absolute;
-        z-index: 2;
-        width: calc(50% - 600px);
-        right: 0;
-        top: 0;
-        height: 800px;
-        background: #fff;
-    }
-
-    .inline-block {
-        display: inline-block;
-    }
-
-    .main_bg {
-        width: 100%;
         height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .center {
-        text-align: center;
+    .bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
-    .green {
-        background-color: green;
-    }
-
-    .pink {
-        background-color: pink;
-    }
-
-    .orange {
-        background-color: orange;
-    }
-
-    .grey {
-        background-color: grey;
+    h1 {
+        color: white;
+        text-shadow: 1px 1px 3px black;
+        z-index: 1;
+        font-size: 3em;
+        font-weight: 400;
     }
 </style>
 
@@ -84,41 +41,26 @@
     <div>
         <h3>데모</h3>
         <div class="main_bg green">
-
-        </div>
-        <div class="center">
-            <div class="box box1 pink ani_tb"></div>
-            <div class="box box2 orange ani_tb"></div>
-            <div class="box box3 grey ani_tb"></div>
-            <div class="box box2 orange ani_tb"></div>
-            <div class="box box3 grey ani_tb"></div>
-        </div>
-        <div class="center">
-            <div class="box box1 pink ani_rl"></div>
-            <div class="box box2 orange ani_rl"></div>
-            <div class="box box3 grey ani_rl"></div>
-            <div class="box box2 orange ani_rl"></div>
-            <div class="box box3 grey ani_rl"></div>
-        </div>
-        <div class="center">
-            <div class="box box1 pink ani_bt" data-delay="1" data-dur="3" data-ease="1"></div>
-            <div class="box box2 orange ani_bt" data-delay="1" data-dur="3" data-ease="1"></div>
-            <div class="box box3 grey ani_bt" data-delay="1" data-dur="3" data-ease="1"></div>
-            <div class="box box2 orange ani_bt" data-delay="1" data-dur="3" data-ease="1"></div>
-            <div class="box box3 grey ani_bt" data-delay="1" data-dur="3" data-ease="1"></div>
-        </div>
-        <div class="center">
-            <div class="box box1 pink ani_lr"></div>
-            <div class="box box2 orange ani_lr"></div>
-            <div class="box box3 grey ani_lr"></div>
-            <div class="box box2 orange ani_lr"></div>
-            <div class="box box3 grey ani_lr"></div>
-        </div>
-        <div class="wrap_ju">
-            <div class="left_box"></div>
-            <div class="right_box"></div>
-            <div class="ju">
-            </div>
+            <section>
+                <div class="bg" style="background:url(img/1.png)"></div>
+                <h1>Simple parallax sections</h1>
+            </section>
+            <section>
+                <div class="bg" style="background:url(img/2.png)"></div>
+                <h1>Hey look, a title</h1>
+            </section>
+            <section>
+                <div class="bg" style="background:url(img/3.png)"></div>
+                <h1>They just keep coming</h1>
+            </section>
+            <section>
+                <div class="bg" style="background:url(img/4.png)"></div>
+                <h1>So smooth though</h1>
+            </section>
+            <section>
+                <div class="bg" style="background:url(img/5.png)"></div>
+                <h1>Nice, right?</h1>
+            </section>
         </div>
     </div>
     <div class="end_tri">
@@ -147,163 +89,179 @@
                     var time_delay = 0;
                     //애니메이션 진행시간
                     var time_dur = 1.5;
-
+                    //애니메이션 eassing
+                    var ease_type = "power1.out";
+            
+                    // 변수 length 
+                    var cnt;
+            
                     $(document).ready(function () {
-
+            
+                        //모바일 체크
                         mobile_ck = function () {
                             var wW = $(window).width()
-                            console.log(wW);
                             if (wW <= 640) {
                                 return true;
                             } else {
                                 return false;
                             }
                         }
-
+            
+                        // 그린샷 변수 초기화
+                        green_var_ini = function () {
+                            //애니메이션 딜레이
+                            time_delay = 0;
+                            //애니메이션 진행시간
+                            time_dur = 1.5;
+                            //애니메이션 eassing
+                            ease_type = "power1.out";
+                        }
+            
+            
+                        // 그린샷 변수값 확인
+                        green_data_confirm = function (el) {
+                            cnt = $(el).length;
+                            if ($(el).is('[data-delay]')) {
+                                time_delay = $(el).attr('data-delay');
+                                if (mobile_ck()) {
+                                    time_delay = 0;
+                                }
+                            }
+                            if ($(el).is('[data-dur]')) { time_dur = $(el).attr('data-dur'); }
+                            if ($(el).is('[data-ease]')) { ease_type = $(el).attr('data-ease'); }
+                        }
+            
+                        // 그린샷 실행
+                        green_execute = function (el, xy) {
+            
+                            var tl = gsap.timeline({
+                                scrollTrigger: {
+                                    trigger: el,
+                                    start: "top 100%",
+                                }
+                            });
+            
+                            if (xy == 0) {
+                                tl.to(el, { delay: time_delay, duration: time_dur, ease: ease_type, opacity: 1, x: 0 });
+                            } else if (xy == 1) {
+                                tl.to(el, { delay: time_delay, duration: time_dur, ease: ease_type, opacity: 1, y: 0 });
+                            } else {
+                                tl.to(el, { duration: time_dur, opacity: 1, width: "0%" });
+                            }
+            
+                        }
+            
                         green_ini = function () {
-                            //스크롤 플러그인 추가
+            
+                            //gsap 플러그인 추가 부분
                             gsap.registerPlugin(ScrollTrigger);
-
-                            // 트렌지션 -안되는 부분 미리 셋팅
+            
+                            //css로 설정 안되는 기본 설정
                             gsap.set(".ani_tb", { y: -100, opacity: 0 })
                             gsap.set(".ani_rl", { x: 100, opacity: 0 })
                             gsap.set(".ani_bt", { y: 100, opacity: 0 })
                             gsap.set(".ani_lr", { x: -100, opacity: 0 })
-
-
-
-                            // GSAP TIMELINE 
-                            gsap.utils.toArray(".ani_tb").forEach(ani_tb => {
-                                if ($(ani_tb).is('[data-delay]')) {
-                                    time_delay = $(ani_tb).attr('data-delay');
-                                    if (mobile_ck()) {
-                                        time_delay = 0;
-                                    }
-                                }
-                                if ($(ani_tb).is('[data-dur]')) {
-                                    time_dur = $(ani_tb).attr('data-dur');
-                                }
-
-                                var tl = gsap.timeline({
-                                    scrollTrigger: {
-                                        trigger: ani_tb,
-                                        start: "top 100%",
-                                    }
-                                });
-                                tl.to(ani_tb, { delay: time_delay, duration: time_dur, opacity: 1, y: 0 });
+            
+                            // GSAP TIMELINE 배열로 돌리기
+                            gsap.utils.toArray(".ani_tb").forEach((ani_tb, index) => {
+                                green_data_confirm(ani_tb);
+                                green_execute(ani_tb, 1);
+                                if (index + 1 == cnt) { green_var_ini(); }
                             });
-
-                            gsap.utils.toArray(".ani_rl").forEach(ani_rl => {
-                                if ($(ani_rl).is('[data-delay]')) {
-                                    time_delay = $(ani_rl).attr('data-delay');
-                                    if (mobile_ck()) {
-                                        time_delay = 0;
-                                    }
-                                }
-                                if ($(ani_rl).is('[data-dur]')) {
-                                    time_dur = $(ani_rl).attr('data-dur');
-                                }
-
-                                var tl = gsap.timeline({
-                                    scrollTrigger: {
-                                        trigger: ani_rl,
-                                        start: "top 100%"
-                                    }
-                                });
-                                tl.to(ani_rl, { delay: time_delay, duration: time_dur, opacity: 1, x: 0 });
+                            gsap.utils.toArray(".ani_rl").forEach((ani_rl, index) => {
+                                green_data_confirm(ani_rl);
+                                green_execute(ani_rl, 0);
+                                if (index + 1 == cnt) { green_var_ini(); }
                             });
-
-                            gsap.utils.toArray(".ani_bt").forEach(ani_bt => {
-                                console.log(ani_bt);
-                                if ($(ani_bt).filter('[data-delay]')) {
-                                    time_delay = $(ani_bt).attr('data-delay');
-                                    console.log(time_delay);
-                                    if (mobile_ck()) {
-                                        time_delay = 0;
-                                    }
-                                }
-
-                                if ($(ani_bt).is('[data-dur]')) {
-                                    time_dur = $(ani_bt).attr('data-dur');
-                                }
-
-                                var tl = gsap.timeline({
-                                    scrollTrigger: {
-                                        trigger: ani_bt,
-                                        start: "top 100%"
-                                    }
-                                });
-
-                                tl.to(ani_bt, { delay: time_delay, duration: time_dur, opacity: 1, y: 0 });
-
+                            gsap.utils.toArray(".ani_bt").forEach((ani_bt, index) => {
+                                green_data_confirm(ani_bt);
+                                green_execute(ani_bt, 1);
+                                if (index + 1 == cnt) { green_var_ini(); }
                             });
-
-                            gsap.utils.toArray(".ani_lr").forEach(ani_lr => {
-                                if ($(ani_lr).is('[data-delay]')) {
-                                    time_delay = $(ani_lr).attr('data-delay');
-                                    if (mobile_ck()) {
-                                        time_delay = 0;
-                                    }
-                                }
-                                if ($(ani_lr).is('[data-dur]')) {
-                                    time_dur = $(ani_lr).attr('data-dur');
-                                }
-                                var tl = gsap.timeline({
-                                    scrollTrigger: {
-                                        trigger: ani_lr,
-                                        start: "top 100%"
-                                    }
-                                });
-                                tl.to(ani_lr, { delay: time_delay, duration: time_dur, opacity: 1, x: 0 });
+                            gsap.utils.toArray(".ani_lr").forEach((ani_lr, index) => {
+                                green_data_confirm(ani_lr);
+                                green_execute(ani_lr, 0);
+                                if (index + 1 == cnt) { green_var_ini(); }
                             });
-
-
+            
                             //  width:100%
-                            // gsap.utils.toArray(".width100").forEach(width100 => {
-                            // var tl = gsap.timeline({
+                            gsap.utils.toArray(".width100").forEach((width100, index) => {
+                                green_data_confirm(ani_lr);
+                                green_execute(ani_lr, 0);
+                                if (index + 1 == cnt) { green_var_ini(); }
+                            });
+            
+            
+                            // ============확대되는부분========== //
+                            // var tl2 = gsap.timeline({
                             //     scrollTrigger: {
-                            //         trigger: width100,
-                            //         start: "top 100%"
+                            //         trigger: ".left_box",
+                            //         start: "top 85%",
+                            //         end: "top 85%",
+                            //         markers: true,
+                            //         scrub: true,
+                            //         endTrigger: ".end_tri"
                             //     }
                             // });
-                            // tl.to(width100, { duration: 1.5, opacity: 1, width: "0%" });
+                            // tl2.to(".left_box", { width: 0 });
+            
+                            // var tl2 = gsap.timeline({
+                            //     scrollTrigger: {
+                            //         trigger: ".right_box",
+                            //         start: "top 85%",
+                            //         end: "top 85%",
+                            //         markers: true,
+                            //         scrub: true,
+                            //         endTrigger: ".end_tri"
+                            //     }
                             // });
-
+                            // tl2.to(".right_box", { width: 0 });
+                            // ============확대되는부분========== //
+            
+            
                         }
-
-                        //green_ini();
-
-
-
-
+            
+                        green_ini();
+            
+            
+                        gsap.utils.toArray("section").forEach((section, i) => {
+                            section.bg = section.querySelector(".bg");
+            
+                            // Give the backgrounds some random images                
+            
+                            // Do the parallax effect on each section
+                            if (i) {
+                                section.bg.style.backgroundPosition = `50% ${-innerHeight / 2}px`;
+            
+                                gsap.to(section.bg, {
+                                    backgroundPosition: `50% ${innerHeight / 2}px`,
+                                    ease: "none",
+                                    scrollTrigger: {
+                                        trigger: section,
+                                        scrub: true
+                                    }
+                                });
+                            }
+            
+                            // the first image should be positioned against the top. Use px on the animating part to work with GSAP. 
+                            else {
+                                section.bg.style.backgroundPosition = "50% 0px";
+            
+                                gsap.to(section.bg, {
+                                    backgroundPosition: `50% ${innerHeight / 2}px`,
+                                    ease: "none",
+                                    scrollTrigger: {
+                                        trigger: section,
+                                        start: "top top",
+                                        end: "bottom top",
+                                        scrub: true
+                                    }
+                                });
+                            }
+                        });
+            
+            
                     });
-            
-            
-                    // ============확대되는부분========== //
-                    var tl2 = gsap.timeline({
-                            scrollTrigger: {
-                                trigger: ".left_box",
-                                start: "top 85%",
-                                end: "top 85%",
-                                markers: true,
-                                scrub: true,
-                                endTrigger: ".end_tri"
-                            }
-                        });
-                    tl2.to(".left_box", { width: 0 });
-            
-                    var tl2 = gsap.timeline({
-                            scrollTrigger: {
-                                trigger: ".right_box",
-                                start: "top 85%",
-                                end: "top 85%",
-                                markers: true,
-                                scrub: true,
-                                endTrigger: ".end_tri"
-                            }
-                        });
-                    tl2.to(".right_box", { width: 0 });
-                    // ============확대되는부분========== //
                 </xmp>
             </pre>
         </div>
@@ -383,7 +341,7 @@
         var cnt;
 
         $(document).ready(function () {
-            
+
             //모바일 체크
             mobile_ck = function () {
                 var wW = $(window).width()
@@ -403,8 +361,8 @@
                 //애니메이션 eassing
                 ease_type = "power1.out";
             }
-  
-  
+
+
             // 그린샷 변수값 확인
             green_data_confirm = function (el) {
                 cnt = $(el).length;
@@ -432,7 +390,7 @@
                     tl.to(el, { delay: time_delay, duration: time_dur, ease: ease_type, opacity: 1, x: 0 });
                 } else if (xy == 1) {
                     tl.to(el, { delay: time_delay, duration: time_dur, ease: ease_type, opacity: 1, y: 0 });
-                } else {                
+                } else {
                     tl.to(el, { duration: time_dur, opacity: 1, width: "0%" });
                 }
 
@@ -452,29 +410,29 @@
                 // GSAP TIMELINE 배열로 돌리기
                 gsap.utils.toArray(".ani_tb").forEach((ani_tb, index) => {
                     green_data_confirm(ani_tb);
-                    green_execute(ani_tb,1);
+                    green_execute(ani_tb, 1);
                     if (index + 1 == cnt) { green_var_ini(); }
                 });
                 gsap.utils.toArray(".ani_rl").forEach((ani_rl, index) => {
                     green_data_confirm(ani_rl);
-                    green_execute(ani_rl,0);                   
+                    green_execute(ani_rl, 0);
                     if (index + 1 == cnt) { green_var_ini(); }
                 });
                 gsap.utils.toArray(".ani_bt").forEach((ani_bt, index) => {
                     green_data_confirm(ani_bt);
-                    green_execute(ani_bt,1);                    
+                    green_execute(ani_bt, 1);
                     if (index + 1 == cnt) { green_var_ini(); }
                 });
                 gsap.utils.toArray(".ani_lr").forEach((ani_lr, index) => {
                     green_data_confirm(ani_lr);
-                    green_execute(ani_lr,0);                    
+                    green_execute(ani_lr, 0);
                     if (index + 1 == cnt) { green_var_ini(); }
                 });
 
                 //  width:100%
                 gsap.utils.toArray(".width100").forEach((width100, index) => {
                     green_data_confirm(ani_lr);
-                    green_execute(ani_lr,0);
+                    green_execute(ani_lr, 0);
                     if (index + 1 == cnt) { green_var_ini(); }
                 });
 
@@ -511,6 +469,41 @@
             green_ini();
 
 
+            gsap.utils.toArray("section").forEach((section, i) => {
+                section.bg = section.querySelector(".bg");
+
+                // Give the backgrounds some random images                
+
+                // Do the parallax effect on each section
+                if (i) {
+                    section.bg.style.backgroundPosition = `50% ${-innerHeight / 2}px`;
+
+                    gsap.to(section.bg, {
+                        backgroundPosition: `50% ${innerHeight / 2}px`,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: section,
+                            scrub: true
+                        }
+                    });
+                }
+
+                // the first image should be positioned against the top. Use px on the animating part to work with GSAP. 
+                else {
+                    section.bg.style.backgroundPosition = "50% 0px";
+
+                    gsap.to(section.bg, {
+                        backgroundPosition: `50% ${innerHeight / 2}px`,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top top",
+                            end: "bottom top",
+                            scrub: true
+                        }
+                    });
+                }
+            });
 
 
         });
